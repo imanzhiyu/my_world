@@ -2,7 +2,7 @@
  * @FilePath: static/css/style.css
  * @Author: Joel
  * @Date: 2025-08-10 09:50:56
- * @LastEditTime: 2025-08-10 20:19:28
+ * @LastEditTime: 2025-08-14 19:22:15
  * @Description: 
  */
 
@@ -74,6 +74,12 @@ footer {
     margin-right: 10px;
 }
 
+/*计时器*/
+#creation-timer {
+    font-size: 0.9rem;
+    color: rgba(0, 123, 255, 0.6); /* 淡蓝色，可根据需要调整 */
+    margin-right: 50px; /* 与用户名隔开 */
+}
 
 /* 首页Hero Banner */
 .hero-banner {
