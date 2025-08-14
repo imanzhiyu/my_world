@@ -1,0 +1,51 @@
+<!--
+ * @FilePath: templates/private_tools.html
+ * @Author: Joel
+ * @Date: 2025-08-11 17:20:45
+ * @LastEditTime: 2025-08-13 20:18:15
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="private-tools-container">
+    <a href="{{ url_for('private.private_page') }}" class="btn btn-secondary">&lt;&lt; 返回</a>
+    <div class="top-buttons">
+        <button><< Tools >></button>
+        <button id="addToolBtn" class="btn btn-add">新增</button>
+        <button id="deleteSelectedBtn" class="btn btn-delete" disabled>删除</button>
+    </div>
+
+    <div id="toolsManageList" class="tools-manage-list">
+        {% for tool in tools %}
+        <div class="tool-card manage-card" data-id="{{ tool.name }}" data-file="{{ tool.file }}"
+             data-is-upload="{{ 'true' if tool.is_upload else 'false' }}">
+            <input type="checkbox" class="select-tool"/>
+            {% if tool.icon == 'tools/no-pictures.png' %}
+            <img src="{{ url_for('static', filename='img/tools/no-pictures.png') }}" alt="{{ tool.name }}"
+                 class="tool-icon"/>
+            {% else %}
+            {% if tool.is_upload %}
+            <img src="{{ url_for('home.uploaded_files', filename=tool.icon.replace('tools/', 'img/tools/')) }}"
+                 alt="{{ tool.name }}" class="tool-icon"/>
+            {% else %}
+            <img src="{{ url_for('static', filename='img/' + tool.icon) }}" alt="{{ tool.name }}" class="tool-icon"/>
+            {% endif %}
+            {% endif %}
+            <div class="tool-name">{{ tool.name }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+<!-- 引入上传弹窗模板 -->
+{% include 'private_tool_upload.html' %}
+<script>
+    const UPLOAD_TOOL_URL = "{{ url_for('private.upload_tool') }}";
+</script>
+
+<script src="{{ url_for('static', filename='js/private_tools.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/private_upload_tool.js') }}" defer></script>
+
+{% endblock %}

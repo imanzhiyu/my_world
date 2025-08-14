@@ -1,0 +1,25 @@
+<!--
+ * @FilePath: templates/research_detail.html
+ * @Author: Joel
+ * @Date: 2025-08-13 18:34:08
+ * @LastEditTime: 2025-08-13 18:34:26
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="english-detail">
+    <a href="{{ url_for('research.research_list') }}">&lt;&lt; 返回</a>
+
+    <h1>{{ content.title }}</h1>
+    <p class="meta">
+        Updated at: {{ content.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}
+    </p>
+
+    <hr>
+
+    <div class="content">
+        {{ content.description|safe }}
+    </div>
+</div>
+{% endblock %}

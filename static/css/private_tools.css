@@ -1,0 +1,285 @@
+/**
+ * @FilePath: static/css/private_tools.css
+ * @Author: Joel
+ * @Date: 2025-08-11 17:23:49
+ * @LastEditTime: 2025-08-14 16:13:42
+ * @Description: 
+ */
+
+/**
+ * @FilePath: static/css/private_tools.css
+ * @Author: Joel
+ * @Date: 2025-08-11 17:23:49
+ * @LastEditTime: 2025-08-14 16:13:42
+ * @Description: 工具管理页样式
+ */
+
+/* 工具页主容器 */
+.private-tools-container {
+    width: 72%;
+    max-width: 1200px;
+    min-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+    min-height: calc(100vh - 500px);
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* 顶部返回按钮 */
+.private-tools-container .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.private-tools-container .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* 顶部按钮组 */
+.top-buttons {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 按钮通用样式 */
+.btn {
+    padding: 0.5rem 1rem;
+    margin-left: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    display: inline-block;
+}
+
+/* 新增 / 删除按钮 */
+.btn-add {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-delete:hover:not(:disabled) {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 工具卡片 */
+/* 工具管理列表容器 */
+.tools-manage-list {
+    display: flex;
+    flex-wrap: wrap; /* 自动换行 */
+    gap: 15px; /* 卡片间距 */
+    margin-top: 15px;
+    height: calc(100vh - 250px);
+}
+
+/* 工具卡片 */
+.tool-card {
+    position: relative; /* 让checkbox相对卡片定位 */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /*调整每个卡片*/
+    width: 160px;
+    height: 180px;
+    box-sizing: border-box;
+}
+
+
+/* 小屏幕适配 */
+@media (max-width: 900px) {
+    .tool-card {
+        width: calc(50% - 10px); /* 每行显示2个 */
+    }
+}
+
+@media (max-width: 600px) {
+    .tool-card {
+        width: 100%; /* 每行1个 */
+    }
+}
+
+
+.tool-card:hover {
+    background-color: #eef5ff;
+    transform: translateY(-2px);
+}
+
+.tool-card input.select-tool {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: block !important; /* 确保总是显示 */
+    opacity: 1; /* 不透明 */
+    visibility: visible; /* 可见 */
+    z-index: 10; /* 在最上层，避免被卡片内容覆盖 */
+}
+
+.tool-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.tool-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+    flex: 1;
+}
+
+/* 上传弹窗 */
+.overlay-upload {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none; /* 初始隐藏，通过 JS 控制 */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-box-upload {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    max-width: 90%;
+    box-sizing: border-box;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+/* 文件选择行 */
+.file-select-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.file-select-row input[type="text"] {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn-select-file {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-select-file:hover {
+    background-color: #1c5980;
+    transform: translateY(-2px);
+}
+
+/* 弹窗底部按钮 */
+.modal-action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.modal-action-buttons.button_cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-action-buttons.button_cancel:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.modal-action-buttons.button_submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-action-buttons.button_submit:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* 表单标签 */
+.overlay-upload label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* 输入框 */
+.overlay-upload input[type="text"],
+.overlay-upload input[type="file"] {
+    font-size: 1rem;
+    box-sizing: border-box;
+}

@@ -1,0 +1,31 @@
+<!--
+ * @FilePath: templates/research.html
+ * @Author: Joel
+ * @Date: 2025-08-11 22:29:21
+ * @LastEditTime: 2025-08-13 18:33:34
+ * @Description: 
+ -->
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="english-container" role="main" aria-label="English Content List">
+  <h1>Research Articles</h1>
+  <div class="english-list">
+    {% if contents %}
+      {% for content in contents %}
+      <article class="english-card" tabindex="0" role="link" onclick="location.href='{{ url_for('research.research_detail', content_id=content.id) }}'">
+        <h2 class="english-card-title">{{ content.title }}</h2>
+        <p class="excerpt">{{ content.description[:150] }}{% if content.description|length > 150 %}...{% endif %}</p>
+        <p class="date">Created at: {{ content.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+      </article>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; color:#888;">No research resources found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+
+
+

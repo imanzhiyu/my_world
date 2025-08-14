@@ -1,0 +1,37 @@
+<!--
+ * @FilePath: templates/private_blog_detail.html
+ * @Author: Joel
+ * @Date: 2025-08-11 12:56:36
+ * @LastEditTime: 2025-08-13 12:34:17
+ * @Description: 
+ -->
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="blog-detail-container">
+    <h1>编辑博客</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="title">标题:</label>
+            <input type="text" id="title" name="title" required value="{{ post.title }}">
+        </div>
+
+        <div class="form-group">
+            <label for="content">内容 (支持富文本HTML):</label>
+            <textarea id="content" name="content" rows="10" required>{{ post.content }}</textarea>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="save-btn">保存</button>
+            <a href="{{ url_for('private.blog_list') }}" class="back-btn">返回列表</a>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/private_blog_detail.js') }}"></script>
+{% endblock %}
+
+
+
+

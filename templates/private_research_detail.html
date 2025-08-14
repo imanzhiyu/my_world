@@ -1,0 +1,33 @@
+<!--
+ * @FilePath: templates/private_research_detail.html
+ * @Author: Joel
+ * @Date: 2025-08-13 18:42:02
+ * @LastEditTime: 2025-08-13 18:42:25
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="private-english-edit">
+    <h1>编辑文章</h1>
+
+    <form method="post">
+        <div>
+            <label for="title">标题:</label>
+            <input type="text" id="title" name="title" required value="{{ post.title }}">
+        </div>
+
+        <div>
+            <label for="description">内容 (支持富文本HTML):</label>
+            <textarea id="description" name="description" rows="10" required>{{ post.description }}</textarea>
+        </div>
+
+        <div class="buttons">
+            <button type="submit">保存</button>
+            <a href="{{ url_for('private.private_research_list') }}">返回列表</a>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/private_research_detail.js') }}"></script>
+{% endblock %}

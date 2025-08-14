@@ -1,0 +1,86 @@
+/**
+ * @FilePath: static/css/tools.css
+ * @Author: Joel
+ * @Date: 2025-08-10 18:36:07
+ * @LastEditTime: 2025-08-10 18:57:22
+ * @Description: 
+ */
+/* Tools 页面卡片化 */
+.tools-container {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.search-box {
+    margin-bottom: 1.5rem;
+}
+
+#toolsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+/* 固定卡片宽高，保持一致 */
+.tool-card {
+    width: 150px; /* 统一宽度 */
+    height: 170px; /* 统一高度 */
+    margin: 0.5rem 0;
+    border-radius: 14px;
+    background: #f5f7fa; /* 浅灰白背景 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    text-align: center;
+    padding: 1rem 0.5rem;
+
+    /* 使用flex布局，让内容居中 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tool-card:hover {
+    transform: translateY(-8px);
+}
+
+.tool-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.8rem;
+    flex-shrink: 0;
+}
+
+.tool-name {
+    font-weight: 600;
+    font-size: 1rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+#noResults {
+    display: none;
+    color: #999999;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/*计数和搜索框*/
+.tools_counts {
+    color: #999999;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+#totalCount {
+    color: #999999;
+}

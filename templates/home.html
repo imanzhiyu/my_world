@@ -1,0 +1,43 @@
+<!--
+ * @FilePath: templates/home.html
+ * @Author: Joel
+ * @Date: 2025-08-10 09:48:47
+ * @LastEditTime: 2025-08-11 22:14:31
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-home">
+    <div class="top-section">
+        <div class="hero-banner">
+            <h1 class="text-center mb-3" data-aos="fade-down">Welcome to My Personal Hub</h1>
+        </div>
+        <div class="hero-text">
+            <p class="text-center text-secondary" data-aos="fade-up">“The best and most beautiful things in the
+                world cannot be seen or even touched — they must be felt with the heart.” —— Helen Keller</p>
+            <p class="text-center text-tertiary" data-aos="fade-up">
+                “世界上最美好和最珍贵的东西，眼睛看不见，手也触摸不到，必须用心去感受。”</p>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div calss="button-container">
+        <div class="middle-links">
+            <a href="/private" class="text-link">Private</a>
+            <a href="/english" class="text-link">English Corner</a>
+            <a href="/personal" class="text-link">About Me</a>
+        </div>
+    </div>
+
+    <div class="bottom-cards">
+        {% for card in cards %}
+        <div class="card-home" onclick="location.href='{{ card.link }}'">
+            <img src="{{ url_for('static', filename='img/' + card.img) }}" alt="{{ card.title }}"/>
+            <div class="card-title">{{ card.title }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

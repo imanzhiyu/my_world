@@ -1,0 +1,26 @@
+<!--
+ * @FilePath: templates/blog_detail.html
+ * @Author: Joel
+ * @Date: 2025-08-10 09:49:27
+ * @LastEditTime: 2025-08-13 22:32:03
+ * @Description: 
+ -->
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="english-detail">
+    <a href="{{ url_for('blog.blog_list') }}">&lt;&lt; 返回</a>
+
+    <h1>{{ content.title }}</h1>
+    <p class="meta">
+        Updated at ：{{ content.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}
+    </p>
+
+    <hr>
+
+    <div class="content">
+        {{ content.content|safe }}
+    </div>
+</div>
+{% endblock %}

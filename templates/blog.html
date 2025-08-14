@@ -1,0 +1,29 @@
+<!--
+ * @FilePath: templates/blog.html
+ * @Author: Joel
+ * @Date: 2025-08-10 09:49:11
+ * @LastEditTime: 2025-08-13 20:47:55
+ * @Description: 
+ -->
+
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="english-container" role="main" aria-label="Blog Content List">
+  <h1>Blog Articles</h1>
+  <div class="english-list">
+    {% if contents %}
+      {% for content in contents %}
+      <article class="english-card" tabindex="0" role="link" onclick="location.href='{{ url_for('blog.blog_detail', content_id=content.id) }}'">
+        <h2 class="english-card-title">{{ content.title }}</h2>
+        <p class="excerpt">{{ content.content[:150] }}{% if content.content|length > 150 %}...{% endif %}</p>
+        <p class="date">Created at: {{ content.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+      </article>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; color:#888;">No Blog articles available.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

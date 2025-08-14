@@ -1,0 +1,389 @@
+/**
+ * @FilePath: static/css/english.css
+ * @Author: Joel
+ * @Date: 2025-08-11 22:46:46
+ * @LastEditTime: 2025-08-13 18:22:34
+ * @Description: 
+ */
+
+/* 容器基本字体颜色等 */
+.private-english-container {
+    max-width: 80%;
+    margin: 2rem auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+/* 顶部按钮组 */
+.private-english-container .top-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.private-english-container .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    color: white;
+    user-select: none;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.private-english-container .btn-primary {
+    background-color: #2980b9;
+}
+
+.private-english-container .btn-primary:hover {
+    background-color: #1c5980;
+}
+
+.private-english-container .btn-danger {
+    background-color: #c0392b;
+}
+
+.private-english-container .btn-danger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.private-english-container .btn-danger:not(:disabled):hover {
+    background-color: #96281b;
+}
+
+/* 整个表格的宽度和布局 */
+.english-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px 8px 0 0;
+    background: #2980b9;
+    color: white;
+}
+
+/* 表头行 */
+.english-table thead tr {
+    display: table-row;
+}
+
+/* 表头单元格 */
+.english-table thead th {
+    padding: 12px 8px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 700;
+    vertical-align: middle;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* tbody滚动容器，固定高度 */
+.english-table-body {
+    max-height: calc(100vh - 230px);
+    overflow-y: auto;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* tbody内部的表 */
+.english-body-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: white;
+    color: #2c3e50;
+}
+
+/* tbody行 */
+.english-body-table tbody tr {
+    border-bottom: 1px solid #eee;
+    height: 50px;
+    cursor: default;
+}
+
+.english-body-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* tbody单元格 */
+.english-body-table tbody td {
+    padding: 10px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+/* 列宽控制 */
+.english-table thead th.select-col,
+.english-body-table tbody td.select-col {
+    width: 50px;
+    text-align: center;
+}
+
+.english-table thead th.index-col,
+.english-body-table tbody td.index-col {
+    width: 50px;
+    text-align: center;
+}
+
+.english-table thead th.title-col,
+.english-body-table tbody td.title-col {
+    width: 280px;
+}
+
+.english-table thead th.content-col,
+.english-body-table tbody td.content-col {
+    width: calc(80% - 50px - 280px - 180px - 80px);
+}
+
+.english-table thead th.date-col,
+.english-body-table tbody td.date-col {
+    width: 180px;
+}
+
+.english-table thead th.action-col {
+    width: 80px;
+}
+
+.english-body-table tbody td.action-col {
+    width: 80px;
+    text-align: center;
+}
+
+.english-body-table tbody td.action-col a {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.english-body-table tbody td.action-col a:hover {
+    text-decoration: underline;
+}
+
+/* 新增页面 */
+.private-english-edit,
+.private-english-new {
+    width: 70%;
+    max-width: 900px;
+    min-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+    min-height: calc(100vh - 500px);
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.private-english-edit h1,
+.private-english-new h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.private-english-edit form div,
+.private-english-new form div {
+    margin-bottom: 1.2rem;
+}
+
+.private-english-edit label,
+.private-english-new label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.private-english-edit input[type="text"],
+.private-english-edit textarea,
+.private-english-new input[type="text"],
+.private-english-new textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.private-english-edit .buttons,
+.private-english-new .buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.private-english-edit button,
+.private-english-edit a,
+.private-english-new button,
+.private-english-new a {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.private-english-edit button,
+.private-english-new button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.private-english-edit a,
+.private-english-new a {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.private-english-edit button:hover,
+.private-english-edit a:hover,
+.private-english-new button:hover,
+.private-english-new a:hover {
+    background-color: #1c5980;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== English 列表页样式 ===== */
+.english-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.english-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.english-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 270px; /* 固定卡片高度 */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+}
+
+.english-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #0d47a1;
+}
+
+/* 标题 */
+.english-card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+    line-height: 1.5;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+    white-space: nowrap; /* 单行省略 */
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+    overflow: hidden;
+
+}
+
+.english-card:hover h2 {
+    color: #0073e6;
+}
+
+
+/* 简介 */
+.english-card .excerpt {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+    /*margin-bottom: auto; !* 推到底部，保证时间在下方 *!*/
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* 限制2行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*flex-grow: 1; !* 占中间可用空间 *!*/
+
+    margin: 6px 0;
+    flex: 1; /* 占据中间可用空间 */
+
+}
+
+/* 时间 */
+.english-card .date {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0; /* 高度不被压缩 */
+    margin-bottom: 5px;
+}
+
+/* ===== English 详情页样式 ===== */
+.english-detail {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.english-detail a {
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: 600;
+}
+
+.english-detail a:hover {
+    text-decoration: underline;
+}
+
+.english-detail h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* 单行省略 */
+}
+
+.english-detail .meta {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 1rem;
+}
+
+.english-detail .content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+
+

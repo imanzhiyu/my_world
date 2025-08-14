@@ -1,0 +1,88 @@
+<!--
+ * @FilePath: templates/tools.html
+ * @Author: Joel
+ * @Date: 2025-08-10 09:48:55
+ * @LastEditTime: 2025-08-11 21:04:27
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="tools-container">
+    <!-- 统计栏 -->
+    <div class="tools_counts">
+        当前[小工具]数：<span id="totalCount">{{ total_count }}</span>
+        <!-- 后续扩展分类统计示例（可根据需求打开） -->
+        <!--
+        {% for category, count in category_counts.items() %}
+          &nbsp;&nbsp;|&nbsp;&nbsp; {{ category }}: {{ count }}
+        {% endfor %}
+        -->
+    </div>
+
+    <input
+            type="text"
+            id="searchInput"
+            class="form-control search-box"
+            placeholder="搜索小工具..."
+            autocomplete="off"
+            oninput="filterTools()"
+    />
+
+    <div id="toolsList">
+        {% for tool in tools %}
+        <div class="tool-card" data-name="{{ tool.name|lower }}" onclick="downloadTool('{{ tool.file }}', {{ 'true' if tool.is_upload else 'false' }})">
+            {% if tool.icon == 'tools/no-pictures.png' %}
+                <img src="{{ url_for('static', filename='img/tools/no-pictures.png') }}" alt="{{ tool.name }}" class="tool-icon"/>
+            {% else %}
+                {% if tool.is_upload %}
+                    <img src="{{ url_for('home.uploaded_files', filename=tool.icon.replace('tools/', 'img/tools/')) }}" alt="{{ tool.name }}" class="tool-icon"/>
+                {% else %}
+                    <img src="{{ url_for('static', filename='img/' + tool.icon) }}" alt="{{ tool.name }}" class="tool-icon"/>
+                {% endif %}
+            {% endif %}
+            <div class="tool-name">{{ tool.name }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <p id="noResults">未找到匹配的小工具</p>
+</div>
+
+<script>
+    function filterTools() {
+        const val = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.tool-card');
+        let visibleCount = 0;
+        cards.forEach((card) => {
+            const name = card.getAttribute('data-name');
+            if (name.includes(val)) {
+                card.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        const noResultsElem = document.getElementById('noResults');
+        if (visibleCount === 0) {
+            noResultsElem.style.display = 'block';
+        } else {
+            noResultsElem.style.display = 'none';
+        }
+
+        // 更新总数显示
+        document.getElementById('totalCount').textContent = visibleCount;
+    }
+
+    function downloadTool(fileName, isUpload) {
+    if (isUpload === true || isUpload === 'true') {
+        window.location.href = '/uploads/tools/' + fileName;
+    } else {
+        window.location.href = '/static/tools/' + fileName;
+    }
+}
+
+
+</script>
+{% endblock %}

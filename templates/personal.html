@@ -1,0 +1,51 @@
+<!--
+ * @FilePath: templates/personal.html
+ * @Author: Joel
+ * @Date: 2025-08-11 21:53:02
+ * @LastEditTime: 2025-08-14 15:57:02
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+<section class="personal-container">
+    <div class="personal-card">
+
+        <!-- 头像和基本信息 -->
+        <div class="personal-header">
+            <div class="avatar">
+                <img src="{{ personal.avatar_url or url_for('static', filename='img/icons/avatar2.png') }}" alt="头像">
+            </div>
+            <div class="personal-info">
+                <h1>{{ personal.name or '未填写姓名' }}</h1>
+                <p class="location">{{ personal.location or '未知地区' }}</p>
+                <p class="email"><a href="mailto:{{ personal.email }}">{{ personal.email or '未填写邮箱' }}</a></p>
+
+                <!-- 动态社交链接 -->
+                <div class="social-links">
+                    {% for link in personal.get_links() %}
+                    <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- 个人简介 -->
+        <div class="personal-bio">
+            <h2>关于我</h2>
+            <p>{{ personal.bio | safe if personal.bio else '暂无个人简介' }}</p>
+        </div>
+
+        <!-- 技能标签 -->
+        {% if personal.skills %}
+        <div class="personal-skills">
+            {% for skill in personal.skills.split(',') %}
+            <span class="skill-tag">{{ skill.strip() }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+
+

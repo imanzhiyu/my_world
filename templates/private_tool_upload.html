@@ -1,0 +1,36 @@
+<!--
+ * @FilePath: templates/private_tool_upload.html
+ * @Author: Joel
+ * @Date: 2025-08-11 17:49:39
+ * @LastEditTime: 2025-08-11 20:06:11
+ * @Description: 
+ -->
+
+<div class="overlay-upload" id="uploadModal">
+    <div class="modal-box-upload">
+        <h3 class="modal-title">上传小工具</h3>
+        <form id="uploadForm" enctype="multipart/form-data" autocomplete="off">
+
+            <!-- EXE 文件选择框 -->
+            <label for="exeFile">选择EXE文件 (必选):</label>
+            <div class="file-select-row">
+                <input type="text" id="exeFilePath" readonly placeholder="请选择EXE文件"/>
+                <button type="button" id="exeSelectBtn" class="btn btn-select-file">选择文件</button>
+                <input type="file" id="exeFile" name="exeFile" accept=".exe" hidden/>
+            </div>
+
+            <!-- 图片文件选择框 -->
+            <label for="imgFile">选择图片文件 (可选，jpg/png/ico/svg):</label>
+            <div class="file-select-row">
+                <input type="text" id="imgFilePath" readonly placeholder="请选择图片文件"/>
+                <button type="button" id="imgSelectBtn" class="btn btn-select-file">选择文件</button>
+                <input type="file" id="imgFile" name="imgFile" accept=".jpg,.jpeg,.png,.ico,.svg" hidden/>
+            </div>
+
+            <div class="password_button modal-action-buttons">
+                <button type="button" class="private button_cancel" onclick="closeUploadModal()">取消</button>
+                <button type="submit" class="private button_submit">上传</button>
+            </div>
+        </form>
+    </div>
+</div>

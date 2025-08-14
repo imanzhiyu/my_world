@@ -1,0 +1,63 @@
+<!--
+ * @FilePath: templates/private_english_list.html
+ * @Author: Joel
+ * @Date: 2025-08-11 22:29:39
+ * @LastEditTime: 2025-08-13 20:17:36
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="private-english-container">
+    <a href="{{ url_for('private.private_page') }}" class="btn btn-secondary">&lt;&lt; 返回</a>
+
+    <div class="top-buttons">
+        <button><< English >></button>
+        <a href="{{ url_for('private.private_english_new') }}" class="btn btn-primary">新增</a>
+        <button id="deleteSelectedBtn" class="btn btn-danger" disabled>删除</button>
+    </div>
+
+    <table class="english-table">
+        <thead>
+        <tr>
+            <th class="select-col"><input type="checkbox" id="selectAll"></th>
+            <th class="index-col">序号</th>
+            <th class="title-col">标题</th>
+            <th class="content-col">内容预览</th>
+            <th class="date-col">创建时间</th>
+            <th class="action-col">操作</th>
+        </tr>
+        </thead>
+    </table>
+    <div class="english-table-body">
+        <table class="english-body-table">
+            <tbody>
+            {% for post in posts %}
+            <tr>
+                <td class="select-col"><input type="checkbox" class="selectBox" data-id="{{ post.id }}"></td>
+                <td class="index-col">{{ loop.index }}</td>
+                <td class="title-col">{{ post.title }}</td>
+                <td class="content-col">{{ post.description|striptags }}</td>
+                <td class="date-col">{{ post.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td class="action-col">
+                    <a href="{{ url_for('private.private_english_detail', content_id=post.id) }}">编辑</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" style="text-align:center; color:#777;">没有文章</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<script src="{{ url_for('static', filename='js/private_english_list.js') }}"></script>
+{% endblock %}
+
+
+
+
+

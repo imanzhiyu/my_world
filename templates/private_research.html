@@ -1,0 +1,50 @@
+<!--
+ * @FilePath: templates/private_research.html
+ * @Author: Joel
+ * @Date: 2025-08-11 22:28:57
+ * @LastEditTime: 2025-08-11 22:49:31
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-edit-container">
+    <h2>编辑 Research 内容</h2>
+
+    {# 取最新一条内容用于编辑 #}
+    {% set content = contents[0] if contents|length > 0 else None %}
+
+    <form method="post">
+        <div>
+            <label for="title">标题：</label>
+            <input type="text" id="title" name="title" value="{{ content.title if content else '' }}" maxlength="200"/>
+        </div>
+        <div>
+            <label for="details">详情：</label>
+            <textarea id="details" name="details" rows="8">{{ content.details if content else '' }}</textarea>
+        </div>
+        <button type="submit">保存</button>
+        <button class="btn btn-secondary btn-back" onclick="window.history.back();">&lt;&lt; 返回</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="flash {{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    {# 历史内容列表，可删除或保留 #}
+    {% if contents|length > 1 %}
+    <h3>历史内容列表</h3>
+    <ul>
+        {% for item in contents %}
+        <li><strong>{{ item.title }}</strong> - {{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
+

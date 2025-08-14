@@ -1,0 +1,245 @@
+/**
+ * @FilePath: static/css/private.css
+ * @Author: Joel
+ * @Date: 2025-08-10 17:38:03
+ * @LastEditTime: 2025-08-14 16:34:02
+ * @Description: 
+ */
+
+/* Private页面弹窗 */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.85); /* 浅白蒙层 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background: #ffffff; /* 白色背景 */
+    border-radius: 12px;
+    padding: 2rem;
+    width: 320px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 轻阴影 */
+    color: #222222; /* 深色文字 */
+}
+
+.modal-box h3 {
+    margin-bottom: 1rem;
+    color: #f44336;
+}
+
+.modal-box input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #f0f2f5; /* 浅灰背景 */
+    color: #333333; /* 深色文字 */
+}
+
+.modal-box button {
+    width: 100%;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+
+
+/*<!-- 顶部刘海错误提示 -->*/
+#topErrorBar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #d32f2f; /* 稍暗的红色 */
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    padding: 0.5rem;
+    z-index: 2000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/*密码弹窗*/
+#pwdInput {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: #d32f2f; /* 稍暗的红色 */
+    font-weight: 600;
+}
+
+.password_button {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    max-width: 100%;
+}
+
+.button_submit {
+    font-size: 0.85rem;
+    background-color: #007bff; /* 主按钮蓝色 */
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    color: #fff;
+    flex: 1;
+}
+
+.button_submit:hover {
+    background-color: #0056b3;
+}
+
+.button_cancel {
+    font-size: 0.85rem;
+    background-color: #bbb; /* 浅灰按钮 */
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    flex: 1;
+}
+
+.button_cancel:hover {
+    background-color: #999;
+}
+
+/*private区域*/
+.private {
+    padding: 2rem;
+    color: black;
+    max-width: 85%;
+    margin: auto;
+}
+
+/* 卡片容器，带边框和阴影 */
+.private-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* 卡片间距 */
+    justify-content: flex-start; /* 左对齐 */
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+    max-width: 100%; /* 容器最大宽度 */
+    margin: 0 auto; /* 居中容器 */
+}
+
+/* 卡片 */
+.private.blog_card {
+    background: #fafafa;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.08);
+    cursor: pointer;
+    flex: 0 0 calc((100% / 4) - 0.75rem); /* 4列 - 间距补偿 */
+    box-sizing: border-box;
+    min-height: 200px;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.private.blog_card:hover {
+    box-shadow: 0 10px 25px rgb(0 0 0 / 0.15);
+    border-color: #0d47a1;
+    transform: translateY(-5px);
+}
+
+
+/* 卡片标题 */
+.private.blog_card h3 {
+    margin: 0 0 0.8rem 0;
+    font-size: 1.4rem;
+}
+
+/* 卡片描述 */
+.private.blog_card p {
+    color: #555;
+    font-size: 0.95rem;
+    flex-grow: 1;
+    margin: 0;
+}
+
+
+/* 上传卡片专属背景 */
+.upload-card {
+    background: #e3f2fd;
+    border-color: #90caf9;
+}
+
+/* 弹窗背景覆盖 */
+.overlay-upload {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* 弹窗盒子 */
+.modal-box-upload {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.25);
+    max-width: 400px;
+}
+
+/* 按钮样式 */
+.private.button_cancel {
+    background: #ccc;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.private.button_cancel:hover {
+    background: #bbb;
+}
+
+.private.button_submit.disabled,
+.private.button_submit:disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.private.button_submit {
+    background: #0d47a1;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.private.button_submit:hover {
+    background: #094080;
+}
+
+

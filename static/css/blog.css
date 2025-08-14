@@ -1,0 +1,128 @@
+/**
+ * @FilePath: static/css/blog.css
+ * @Author: Joel
+ * @Date: 2025-08-10 18:37:05
+ * @LastEditTime: 2025-08-13 12:46:11
+ * @Description: 
+ */
+/* 博客 Masonry 布局 */
+
+
+.blog-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    color: #333;
+    padding: 0 1rem;
+}
+
+/* 标题 */
+.blog-container > h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* 每篇博客卡片 */
+.blog-post {
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+    transition: background-color 0.25s ease;
+}
+
+.blog-post:hover {
+    background-color: #f0f4ff;
+}
+
+/* 封面图 */
+.blog-post img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+}
+
+/* 标题 */
+.blog-post h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.3rem 0;
+    color: #1a237e; /* 深蓝色，显眼但不刺眼 */
+}
+
+/* 日期 */
+.blog-post .post-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+/* 摘要 */
+.blog-post .excerpt {
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* 无文章时提示 */
+.no-posts {
+    font-style: italic;
+    color: #999;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+
+.back-button {
+    display: inline-block;
+    margin-right: 1.5rem; /* 增加按钮和标题的间距 */
+    padding: 0.15rem 0.5rem;
+    font-size: 0.9rem;
+    background-color: transparent;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    min-width: 70px;
+    text-align: center;
+}
+
+.back-button:hover {
+    color: #1a237e;
+    border-color: #1a237e;
+    background-color: lightgray;
+}
+
+.title-container {
+    max-width: 1100px;
+    margin: 2rem auto 1rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.title-container > span {
+    font-weight: 700;
+    font-size: 2rem;
+    flex-grow: 1;
+}
+
+.post-meta {
+    color: #666;
+    font-size: 0.9rem;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+}
+
+.content-container {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+

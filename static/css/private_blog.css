@@ -1,0 +1,406 @@
+/**
+ * @FilePath: static/css/private_blog.css
+ * @Author: Joel
+ * @Date: 2025-08-11 15:36:47
+ * @LastEditTime: 2025-08-13 13:34:12
+ * @Description: 
+ */
+
+
+/* 容器 */
+.private-blog-container {
+    max-width: 85%;
+    margin: 1rem auto auto auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* 发布新博客页 */
+.private-blog-new {
+    width: 70%; /* 占屏幕宽度的 70% */
+    max-width: 900px; /* 最大不超过 900px */
+    min-width: 600px; /* 最小不小于 600px，防止过窄 */
+    margin: 2rem auto; /* 垂直 2rem，水平居中 */
+    padding: 2rem;
+    background-color: #fff; /* 白色背景 */
+    border-radius: 12px; /* 圆角 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+    min-height: calc(100vh - 500px); /* 保证有一定高度 */
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.private-blog-new h1 {
+    margin-bottom: 1rem;
+    color: #007bff;
+    font-size: 1.8rem;
+    text-align: left;
+}
+
+.private-blog-new .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.private-blog-new label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.private-blog-new input[type="text"],
+.private-blog-new textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.private-blog-new .form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.private-blog-new button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.private-blog-new button:hover {
+    background-color: #1c5980;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.private-blog-new .btn-link {
+    text-decoration: none;
+    align-self: center;
+    color: #007bff;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.private-blog-new .btn-link:hover {
+    color: #0056b3;
+}
+
+/* 详情页 */
+.blog-detail-container {
+    width: 70%;
+    max-width: 900px;
+    min-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+    min-height: calc(100vh - 500px);
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.blog-detail-container h1 {
+    margin-bottom: 1rem;
+    color: #007bff;
+    font-size: 1.8rem;
+    text-align: left;
+}
+
+/* 顶部按钮组 */
+.top-buttons {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 按钮 */
+.btn {
+    padding: 0.5rem 1rem;
+    margin-left: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    display: inline-block;
+}
+
+.btn.btn-secondary {
+    position: fixed;
+}
+
+.btn-add-blog {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-add-blog:hover {
+    background-color: #218838;
+}
+
+.btn-delete-selected {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete-selected:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-delete-selected:hover:not(:disabled) {
+    background-color: #c82333;
+}
+
+/* 表格列宽 */
+.blog-table thead th.select-col,
+.blog-table tbody td.select-col {
+    width: 40px;
+    max-width: 40px;
+    text-align: center;
+}
+
+.blog-table thead th.index-col,
+.blog-table tbody td.index-col {
+    width: 50px;
+    max-width: 50px;
+    text-align: center;
+}
+
+.blog-table thead th.title-col,
+.blog-table tbody td.title-col {
+    width: 200px;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-table thead th.content-col,
+.blog-table tbody td.content-col {
+    width: 450px;
+    max-width: 450px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-table thead th.date-col,
+.blog-table tbody td.date-col {
+    width: 140px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-table thead th.action-col,
+.blog-table tbody td.action-col {
+    width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+/* 表格 */
+.blog-table {
+    width: auto;
+    min-width: 600px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-left: 0;
+}
+
+/* 表头 */
+.blog-table thead {
+    background-color: #f1f1f1;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.blog-table thead tr {
+    display: table-row;
+}
+
+.blog-table thead th {
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-bottom: 2px solid #ddd;
+    white-space: nowrap;
+}
+
+/* tbody 单独滚动容器 */
+.table-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* tbody 表格 */
+.table-body table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.table-body tbody tr {
+    border-bottom: 1px solid #eee;
+    height: 48px;
+    display: table-row;
+}
+
+.table-body tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* 单元格 */
+.blog-table tbody td {
+    padding: 0 10px;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-table tbody td.select-col {
+    text-align: center;
+    max-width: 40px;
+}
+
+/* 内容预览列加宽 */
+.blog-table tbody td.content-preview {
+    max-width: 650px;
+}
+
+/* 标题列限制宽度 */
+.blog-table tbody td.tittle-preview {
+    max-width: 300px;
+}
+
+/* 详情链接 */
+.detail-link {
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.detail-link:hover {
+    text-decoration: underline;
+}
+
+/* 详情页表单样式 */
+/*.blog-detail-container form,*/
+/*.private-blog-new form {*/
+/*    background: #f9f9f9;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/* form-group 样式 */
+.blog-detail-container .form-group,
+.private-blog-new .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.blog-detail-container label,
+.private-blog-new label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.blog-detail-container input[type="text"],
+.blog-detail-container textarea,
+.private-blog-new input[type="text"],
+.private-blog-new textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* 按钮布局 */
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.save-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #0056b3;
+}
+
+.back-btn {
+    text-decoration: none;
+    align-self: center;
+    color: #007bff;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #e9f2ff;
+    border-color: #007bff;
+}
+
+/* 新增页按钮 hover */
+.blog-detail-container .buttons button,
+.blog-detail-container .buttons a,
+.private-blog-new .buttons button,
+.private-blog-new .buttons a {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.blog-detail-container .buttons button:hover,
+.private-blog-new .buttons button:hover {
+    filter: brightness(0.9);
+}
+
+.blog-detail-container .buttons a:hover,
+.private-blog-new .buttons a:hover {
+    background-color: #e9f2ff;
+    border-color: #007bff;
+}
+
+
+

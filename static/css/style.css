@@ -1,0 +1,275 @@
+/**
+ * @FilePath: static/css/style.css
+ * @Author: Joel
+ * @Date: 2025-08-10 09:50:56
+ * @LastEditTime: 2025-08-10 20:19:28
+ * @Description: 
+ */
+
+/* 通用字体和背景 */
+html, body, .container-home {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff; /* 纯白背景 */
+    color: #222222; /* 深灰文字 */
+    overflow-x: hidden;
+}
+
+html.home-page,
+body.home-page {
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+body.other-page {
+    height: auto;
+    overflow: auto;
+}
+
+.container-home {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* 导航栏 */
+.navbar {
+    background: rgba(255, 255, 255, 0.85) !important; /* 半透明白 */
+    backdrop-filter: blur(10px);
+    color: #222222; /* 导航字体颜色深色 */
+    border-bottom: 1.5px solid rgba(200, 200, 200, 0.2); /* 导航栏底部的分隔线，浅灰色透明 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* 页面底部的分隔线，浅灰色透明 */
+footer {
+    border-top: 1.5px solid rgba(200, 200, 200, 0.2);
+}
+
+
+.navbar-brand {
+    color: #000 !important;
+    margin-left: 10px;
+}
+
+/* 头像和名字 */
+.navbar .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    user-select: none;
+
+}
+
+.ms-2 {
+    margin-right: 10px;
+}
+
+
+/* 首页Hero Banner */
+.hero-banner {
+    height: 85px; /* 明确固定高度 */
+    padding: 0.5rem 2rem; /* 缩小内边距，上下0.5rem */
+    box-sizing: border-box; /* 确保padding在高度内 */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* 垂直居中 */
+    background: url("../img/cards/hero_banner.jpg") center center / cover no-repeat;
+    color: #ffffff; /* 白色文字 */
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7); /* 深阴影 */
+}
+
+/* 标题 */
+.hero-banner h1 {
+    padding: 0.7rem 1rem 1rem 1rem;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0;
+    /* 多层阴影，更立体 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7),
+    0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+
+/* 简介容器 */
+.hero-text {
+    padding: 0.1rem 2rem 0.2rem 2rem;
+    color: #555555; /* 深灰色 */
+    text-align: center;
+}
+
+
+/* 英文简介 */
+.hero-text p.text-secondary {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #7a7a7a; /* 柔和灰色 */
+    font-style: italic;
+}
+
+/* 中文简介 */
+.hero-text p.text-tertiary {
+    margin-top: 0;
+    font-size: 1rem;
+    color: #7a7a7a;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/* 文字链接区域 */
+.button-container {
+    position: relative; /* 为按钮容器定位 */
+}
+
+/* 按钮容器 */
+.middle-links {
+    position: absolute; /* 绝对定位，不占用spacer空间 */
+    top: 45%; /* 垂直居中页面区域 */
+    left: 2rem; /* 靠左边距 */
+    transform: translateY(-50%); /* 垂直居中自身 */
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    z-index: 10;
+}
+
+/* 按钮样式 */
+.middle-links .text-link {
+    display: inline-block;
+    width: fit-content; /* 使宽度紧贴文字 */
+    white-space: nowrap; /* 防止文字换行 */
+    color: #003366;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 0; /* 取消左右内边距 */
+    background-image: linear-gradient(#007bff, #007bff);
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.3s ease, color 0.3s ease;
+}
+
+
+.middle-links .text-link:hover {
+    color: #007bff;
+    background-size: 100% 2px;
+}
+
+
+/* 底部卡片区域 */
+.bottom-cards {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem 7rem 3rem;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.2rem;
+}
+
+.bottom-cards .card-home {
+    flex: 1 1 0;
+    max-width: calc((100% - 5rem) / 3);
+    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative; /* 让文字层绝对定位 */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+    background-color: #fafafa; /* 极浅灰白 */
+    color: #222222;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    height: 260px; /* 你可以调整卡片高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.bottom-cards .card-home img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    user-select: none;
+}
+
+.bottom-cards .card-home .card-title {
+    position: relative; /* 文字层放在图片上方 */
+    z-index: 2;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #003366;
+    padding-bottom: 0.2rem;
+    width: fit-content;
+    margin: 0 auto;
+    border-bottom: 2px solid #ffffff;
+    padding: 0.2rem 0.8rem;
+    border-radius: 8px;
+    user-select: none;
+}
+
+/* 悬停效果 */
+.bottom-cards .card-home:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* 首页卡片 */
+.card-home {
+    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background-color: #f5f7fa; /* 浅灰白 */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    color: #333333;
+}
+
+.card-home:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-home img {
+    height: 140px;
+    object-fit: cover;
+    width: 100%;
+    user-select: none;
+}
+
+.card-home .card-body {
+    padding: 0.8rem 1rem;
+}
+
+.card-home .card-title {
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    font-size: 1.25rem;
+    color: #003366;
+}
+
+.card-home .card-text {
+    font-size: 0.9rem;
+    color: #003366; /* 中灰 */
+}
+
+
+
+

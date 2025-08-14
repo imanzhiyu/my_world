@@ -1,0 +1,122 @@
+<!--
+ * @FilePath: templates/private_personal.html
+ * @Author: Joel
+ * @Date: 2025-08-11 21:53:19
+ * @LastEditTime: 2025-08-14 16:23:52
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+{% block content %}
+<section class="personal-edit-container">
+
+    <!-- flash 提示 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div id="flashContainer" class="flash-container">
+        {% for category, message in messages %}
+        <span class="flash {{ category }}">{{ message }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('private.private_page') }}" class="btn-back">&lt;&lt; 返回</a>
+
+    <h2>编辑个人信息</h2>
+    <form id="personalForm" method="post">
+
+        <!-- 头像 -->
+        <div class="form-row">
+            <div class="form-group full-width">
+                <label for="avatar_url">头像 URL：</label>
+                <input type="text" id="avatar_url" name="avatar_url" value="{{ personal.avatar_url or '' }}">
+            </div>
+        </div>
+
+        <!-- 姓名 + 邮箱 -->
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label for="name">姓名：</label>
+                <input type="text" id="name" name="name" value="{{ personal.name or '' }}" maxlength="64">
+            </div>
+            <div class="form-group half-width">
+                <label for="email">邮箱：</label>
+                <input type="email" id="email" name="email" value="{{ personal.email or '' }}" maxlength="120">
+            </div>
+        </div>
+
+        <!-- 城市 -->
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label for="location">所在城市：</label>
+                <input type="text" id="location" name="location" value="{{ personal.location or '' }}">
+            </div>
+            <div class="form-group half-width">
+                <label for="skills">技能 (用逗号分隔)：</label>
+                <input type="text" id="skills" name="skills" value="{{ personal.skills or '' }}">
+            </div>
+        </div>
+
+        <!-- 动态链接 -->
+        <div class="form-row">
+            <div class="form-group full-width">
+                <label>社交/个人链接：</label>
+                <div id="links-container">
+                    {% for link in personal.get_links() %}
+                    <div class="link-item">
+                        <input type="text" name="link_name" value="{{ link.name }}" placeholder="名称">
+                        <input type="url" name="link_url" value="{{ link.url }}" placeholder="链接地址">
+                        <button type="button" class="personal-delete-link" onclick="this.parentNode.remove()">删除
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class="personal-add-link" onclick="addLink()">+ 添加链接</button>
+            </div>
+        </div>
+
+        <!-- 个人简介 -->
+        <div class="form-row">
+            <div class="form-group full-width">
+                <label for="bio">个人简介：</label>
+                <textarea id="bio" name="bio" rows="6" maxlength="1000">{{ personal.bio or '' }}</textarea>
+            </div>
+        </div>
+
+        <!-- 保存按钮 -->
+        <div class="form-row" style="text-align: center; margin-top: 1rem;">
+            <button type="submit" class="btn-save">保存</button>
+        </div>
+
+    </form>
+</section>
+
+<script>
+    function addLink() {
+        const container = document.getElementById('links-container');
+        const div = document.createElement('div');
+        div.className = 'link-item';
+        div.innerHTML = `
+        <input type="text" name="link_name" placeholder="名称">
+        <input type="url" name="link_url" placeholder="链接地址">
+        <button type="button" onclick="this.parentNode.remove()">删除</button>
+    `;
+        container.appendChild(div);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const flashContainer = document.getElementById('flashContainer');
+        if (flashContainer) {
+            setTimeout(() => {
+                flashContainer.style.opacity = '0';
+                setTimeout(() => flashContainer.style.display = 'none', 1000);
+            }, 2000);
+        }
+    });
+</script>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,359 @@
+/**
+ * @FilePath: static/css/personal.css
+ * @Author: Joel
+ * @Date: 2025-08-11 21:53:56
+ * @LastEditTime: 2025-08-14 16:32:31
+ * @Description: 
+ */
+
+/* 整体容器 */
+.personal-container, .personal-edit-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 卡片风格 */
+.personal-card {
+    background: linear-gradient(145deg, #ffffff, #f0f4f8);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.personal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* 头像与信息 */
+.personal-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0d6efd;
+    transition: transform 0.3s ease;
+}
+
+.avatar img:hover {
+    transform: scale(1.05);
+}
+
+.personal-info h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: #222;
+}
+
+.personal-info .location {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.personal-info .email a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.personal-info .email a:hover {
+    text-decoration: underline;
+}
+
+/* 社交链接 */
+.social-links a {
+    display: inline-block;
+    margin-right: 1rem;
+    color: #fff;
+    background-color: #0d6efd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+    background-color: #084fc7;
+    transform: translateY(-2px);
+}
+
+/* 简介 */
+.personal-bio h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.personal-bio p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* 技能标签 */
+.personal-skills {
+    margin-top: 1.5rem;
+}
+
+.skill-tag {
+    display: inline-block;
+    background: #0d6efd;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin: 0.2rem;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.skill-tag:hover {
+    transform: scale(1.1);
+    background: #084fc7;
+}
+
+/* 按钮 */
+.btn-edit, .btn-save, .btn-back {
+    display: inline-block;
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-edit:hover, .btn-save:hover {
+    background-color: #084fc7;
+    transform: translateY(-2px);
+}
+
+.btn-back {
+    background-color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.btn-back:hover {
+    background-color: #495057;
+}
+
+/* 表单 */
+.personal-edit-container form .form-group {
+    margin-bottom: 1rem;
+}
+
+.personal-edit-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.personal-edit-container input[type="text"],
+.personal-edit-container input[type="email"],
+.personal-edit-container textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.flash-container {
+    position: fixed;
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.flash {
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    display: inline-block;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.flash.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* 响应式 */
+@media screen and (max-width: 768px) {
+    .personal-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .avatar img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.personal-edit-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    flex: 1 1 100%;
+}
+
+.form-group.half-width {
+    flex: 1 1 calc(50% - 0.5rem);
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.btn-save {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-save:hover {
+    background-color: #084fc7;
+}
+
+.btn-back {
+    display: inline-block;
+    margin-bottom: 1rem;
+    background-color: slategray;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: black;
+}
+
+/* === 动态社交链接编辑 === */
+.link-item {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.link-item input[type="text"],
+.link-item input[type="url"] {
+    flex: 1;
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-remove:hover {
+    background-color: #b02a37;
+    transform: translateY(-1px);
+}
+
+/*添加链接按钮*/
+.personal-add-link {
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.personal-add-link:hover {
+    background-color: #084fc7;
+    transform: translateY(-1px);
+}
+
+/*添加链接的删除按钮*/
+.link-item button[type=button] {
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.link-item button[type=button]:hover {
+    background-color: #084fc7;
+    transform: translateY(-1px);
+}
+
