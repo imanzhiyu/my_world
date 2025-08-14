@@ -2,7 +2,7 @@
  * @FilePath: templates/base.html
  * @Author: Joel
  * @Date: 2025-08-10 09:48:38
- * @LastEditTime: 2025-08-12 21:50:36
+ * @LastEditTime: 2025-08-14 19:23:22
  * @Description: 
  -->
 <!DOCTYPE html>
@@ -27,6 +27,7 @@
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="/">MySite</a>
         <div class="d-flex align-items-center">
+            <span id="creation-timer"></span> <!-- 计时器显示位置 -->
             <img src="{{ url_for('static', filename='img/icons/avatar.png') }}" alt="Avatar" class="avatar"/>
             <span class="ms-2">Joel</span>
         </div>
@@ -37,6 +38,29 @@
 {% block content %}{% endblock %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 设置项目创建时间
+    const creationTime = new Date("2025-08-10T00:00:00");
+
+    function updateTimer() {
+        const now = new Date();
+        let diff = Math.floor((now - creationTime) / 1000); // 秒差
+
+        const days = Math.floor(diff / (24 * 3600));
+        diff %= 24 * 3600;
+        const hours = Math.floor(diff / 3600);
+        diff %= 3600;
+        const minutes = Math.floor(diff / 60);
+        const seconds = diff % 60;
+
+        document.getElementById("creation-timer").textContent =
+            `Created：${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+    }
+
+    // 每秒刷新一次
+    setInterval(updateTimer, 1000);
+    updateTimer(); // 页面加载立即显示
+</script>
 </body>
 </html>
 
