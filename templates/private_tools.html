@@ -2,7 +2,7 @@
  * @FilePath: templates/private_tools.html
  * @Author: Joel
  * @Date: 2025-08-11 17:20:45
- * @LastEditTime: 2025-08-13 20:18:15
+ * @LastEditTime: 2025-08-17 00:04:17
  * @Description: 
  -->
 {% extends 'base.html' %}
@@ -10,7 +10,7 @@
 <div class="private-tools-container">
     <a href="{{ url_for('private.private_page') }}" class="btn btn-secondary">&lt;&lt; 返回</a>
     <div class="top-buttons">
-        <button><< Tools >></button>
+        <button style="font-weight: bold; border-radius: 12px;padding: 5px 24px;">Tools</button>
         <button id="addToolBtn" class="btn btn-add">新增</button>
         <button id="deleteSelectedBtn" class="btn btn-delete" disabled>删除</button>
     </div>

@@ -2,14 +2,7 @@
 FilePath: routes/private.py
 Author: Joel
 Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-16 19:53:08
-Description: 
-"""
-"""
-FilePath: routes/private.py
-Author: Joel
-Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-16 19:53:08
+LastEditTime: 2025-08-16 23:26:12
 Description: 
 """
 from flask import Blueprint, render_template, redirect, url_for, flash, session, request, current_app, jsonify
@@ -67,27 +60,35 @@ def private_page():
         if request.form.get('password') == PASSWORD:
             # 生成 session_id 并保存到 session cookie
             session_id = str(uuid.uuid4())
-            session['private_session_id'] = session_id
             # 写入数据库
             expired_at = datetime.utcnow() + ACCESS_DURATION
             new_sess = PrivateSession(session_id=session_id, expired_at=expired_at)
             db.session.add(new_sess)
             db.session.commit()
 
-            return redirect(url_for('private.private_page'))
+            return jsonify({"session_id": session_id})
         else:
             return '', 401
 
-    # GET: 验证 session
+        # GET 请求：检查 header
+    session_id = request.headers.get("X-Private-Session")
     if session_id:
         db_sess = PrivateSession.query.filter_by(session_id=session_id).first()
         if db_sess and not db_sess.is_expired():
             access = True
-        else:
-            # 过期或不存在，仅清除浏览器 session，不删除数据库记录
-            session.pop('private_session_id', None)
 
     return render_template('private.html', access=access)
+
+
+# 页面初始化检查
+@private_bp.route('/check', methods=['GET'])
+def check_access():
+    session_id = request.headers.get("X-Private-Session")
+    if session_id:
+        db_sess = PrivateSession.query.filter_by(session_id=session_id).first()
+        if db_sess and not db_sess.is_expired():
+            return jsonify({"access": True})
+    return jsonify({"access": False})  # 不返回 401
 
 
 # === 博客相关 ==========================================================================================
@@ -170,20 +171,6 @@ def private_tools_manage():
 
 @private_bp.route('/tools/upload_tool', methods=['POST'])
 def upload_tool():
-    # 从 session 里取 session_id
-    session_id = session.get('private_session_id')
-    access = False
-
-    if session_id:
-        db_sess = PrivateSession.query.filter_by(session_id=session_id).first()
-        if db_sess and not db_sess.is_expired():  # 只判断是否过期，不删除
-            access = True
-        else:
-            session.pop('private_session_id', None)  # 过期或不存在就清除 session_id
-
-    if not access:
-        return jsonify({'error': '会话已过期，请重新输入密码'}), 401
-
     if 'exeFile' not in request.files:
         return jsonify({'error': '未找到exe文件'}), 400
 
