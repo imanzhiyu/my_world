@@ -2,14 +2,14 @@
 FilePath: routes/private.py
 Author: Joel
 Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-16 19:00:54
+LastEditTime: 2025-08-16 19:53:08
 Description: 
 """
 """
 FilePath: routes/private.py
 Author: Joel
 Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-16 19:00:54
+LastEditTime: 2025-08-16 19:53:08
 Description: 
 """
 from flask import Blueprint, render_template, redirect, url_for, flash, session, request, current_app, jsonify
@@ -52,78 +52,42 @@ def allowed_file(filename, allowed_exts):
 
 
 # ==== 进入private的密码验证 ================================================================================
-# token验证，可以跨域
-import jwt
-import datetime
 
-# 生成 token 的密钥
-TOKEN_SECRET = os.getenv("PRIVATE_TOKEN_SECRET", "supersecretkey")
-ACCESS_DURATION_MINUTES = ACCESS_DURATION  # 120分钟有效期
-
-import jwt
-from datetime import datetime, timedelta
-
-
-def generate_token():
-    exp = datetime.utcnow() + ACCESS_DURATION
-    payload = {"exp": exp}
-    token = jwt.encode(payload, TOKEN_SECRET, algorithm="HS256")
-    # PyJWT >= 2.0 返回 str，不需要 decode
-    if isinstance(token, bytes):
-        token = token.decode('utf-8')
-    return token
-
-
-def verify_token(token):
-    try:
-        jwt.decode(token, TOKEN_SECRET, algorithms=["HS256"])
-        return True
-    except jwt.ExpiredSignatureError:
-        return False
-    except jwt.InvalidTokenError:
-        return False
+# session验证
+from models.private_session import PrivateSession
+import uuid
 
 
 @private_bp.route('/', methods=['GET', 'POST'])
 def private_page():
-    token = request.args.get('token')
     access = False
-
-    if token and verify_token(token):
-        access = True
+    session_id = session.get('private_session_id')
 
     if request.method == 'POST':
         if request.form.get('password') == PASSWORD:
-            token = generate_token()
-            return redirect(url_for('private.private_page', token=token))
+            # 生成 session_id 并保存到 session cookie
+            session_id = str(uuid.uuid4())
+            session['private_session_id'] = session_id
+            # 写入数据库
+            expired_at = datetime.utcnow() + ACCESS_DURATION
+            new_sess = PrivateSession(session_id=session_id, expired_at=expired_at)
+            db.session.add(new_sess)
+            db.session.commit()
+
+            return redirect(url_for('private.private_page'))
         else:
             return '', 401
 
-    return render_template('private.html', access=access, token=token)
+    # GET: 验证 session
+    if session_id:
+        db_sess = PrivateSession.query.filter_by(session_id=session_id).first()
+        if db_sess and not db_sess.is_expired():
+            access = True
+        else:
+            # 过期或不存在，仅清除浏览器 session，不删除数据库记录
+            session.pop('private_session_id', None)
 
-
-# session验证，无法跨域
-# @private_bp.route('/', methods=['GET', 'POST'])
-# def private_page():
-#     if request.method == 'POST':
-#         if request.form.get('password') == PASSWORD:
-#             session['private_access'] = True
-#             session['private_access_time'] = datetime.utcnow().isoformat()
-#             return redirect(url_for('private.private_page'))
-#         else:
-#             return '', 401
-# 
-#     access = False
-#     access_time_str = session.get('private_access_time')
-#     if session.get('private_access') and access_time_str:
-#         access_time = datetime.fromisoformat(access_time_str)
-#         if datetime.utcnow() - access_time < ACCESS_DURATION:
-#             access = True
-#         else:
-#             session.pop('private_access', None)
-#             session.pop('private_access_time', None)
-# 
-#     return render_template('private.html', access=access)
+    return render_template('private.html', access=access)
 
 
 # === 博客相关 ==========================================================================================
@@ -206,19 +170,18 @@ def private_tools_manage():
 
 @private_bp.route('/tools/upload_tool', methods=['POST'])
 def upload_tool():
-    # # 会话过期拦截
-    # access_time_str = session.get('private_access_time')
-    # if not session.get('private_access') or not access_time_str:
-    #     return jsonify({'error': '会话已过期，请重新输入密码'}), 401
-    # access_time = datetime.fromisoformat(access_time_str)
-    # if datetime.utcnow() - access_time >= ACCESS_DURATION:
-    #     session.pop('private_access', None)
-    #     session.pop('private_access_time', None)
-    #     return jsonify({'error': '会话已过期，请重新输入密码'}), 401
+    # 从 session 里取 session_id
+    session_id = session.get('private_session_id')
+    access = False
 
-    # token过期拦截
-    token = request.form.get('token') or request.args.get('token')
-    if not token or not verify_token(token):
+    if session_id:
+        db_sess = PrivateSession.query.filter_by(session_id=session_id).first()
+        if db_sess and not db_sess.is_expired():  # 只判断是否过期，不删除
+            access = True
+        else:
+            session.pop('private_session_id', None)  # 过期或不存在就清除 session_id
+
+    if not access:
         return jsonify({'error': '会话已过期，请重新输入密码'}), 401
 
     if 'exeFile' not in request.files:

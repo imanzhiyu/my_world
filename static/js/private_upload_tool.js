@@ -2,7 +2,7 @@
 //  * @FilePath: static/js/private_upload_tool.js
 //  * @Author: Joel
 //  * @Date: 2025-08-11 12:53:44
-//  * @LastEditTime: 2025-08-16 19:09:44
+//  * @LastEditTime: 2025-08-16 19:58:05
 //  * @Description:上传小工具弹窗逻辑
 //  */
 
@@ -78,21 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('请先选择 EXE 文件');
             return;
         }
-        // ✅ 先检查 token
-        if (!PRIVATE_TOKEN) {
-            alert('会话已过期，请先输入密码');
-            window.location.reload();  // 刷新页面，让用户重新获取 token
-            return;
-        }
 
         const formData = new FormData();
         formData.append('exeFile', exeInputHidden.files[0]);
+        
         if (imgInputHidden.files.length > 0) {
             formData.append('imgFile', imgInputHidden.files[0]);
         }
-
-        // ✅ 在这里加上 token
-        formData.append('token', PRIVATE_TOKEN);
 
         try {
             const res = await fetch(UPLOAD_TOOL_URL, {
