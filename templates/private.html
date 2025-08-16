@@ -2,14 +2,14 @@
  * @FilePath: templates/private.html
  * @Author: Joel
  * @Date: 2025-08-10 09:50:03
- * @LastEditTime: 2025-08-16 19:57:05
+ * @LastEditTime: 2025-08-16 23:35:31
  * @Description: 
  -->
 {% extends 'base.html' %}
 {% block content %}
 <div>
-    {% if access %}
-    <div class="private">
+    <!-- 私人内容区，初始隐藏 -->
+    <div id="privateContent" class="private" style="display:none;">
         <div class="private-header">
             <h2>Welcome to Private Section</h2>
             <p>这里是私人内容区！</p>
@@ -26,40 +26,32 @@
                 <h3 style="margin:0; color: #0d47a1;">工具管理</h3>
                 <p style="color:#555; margin-top: 0.5rem;">新增、删除小工具文件</p>
             </div>
-            
+
             <!-- 个人管理卡片 -->
             <div class="private blog_card personal_card" onclick="location.href='{{ url_for('private.private_personal_edit') }}'">
                 <h3 style="margin:0; color: blueviolet;">个人信息管理</h3>
                 <p style="color:#555; margin-top: 0.5rem;">查看和编辑你的个人信息</p>
             </div>
-            
-            <!-- English 管理卡片 -->
-          <div class="private blog_card english_card"
-               onclick="location.href='{{ url_for('private.private_english_list') }}'">
-            <h3 style="margin:0; color: darkorange;">English 管理</h3>
-            <p style="color:#555; margin-top:0.5rem;">编辑英语相关内容</p>
-          </div>
-        
-          <!-- Research 管理卡片 -->
-          <div class="private blog_card research"
-               onclick="location.href='{{ url_for('private.private_research_list') }}'">
-            <h3 style="margin:0; color: green;">Research 管理</h3>
-            <p style="color:#555; margin-top:0.5rem;">编辑科研相关内容</p>
-          </div>
-            
-            
-        </div>
 
+            <!-- English 管理卡片 -->
+            <div class="private blog_card english_card" onclick="location.href='{{ url_for('private.private_english_list') }}'">
+                <h3 style="margin:0; color: darkorange;">English 管理</h3>
+                <p style="color:#555; margin-top:0.5rem;">编辑英语相关内容</p>
+            </div>
+
+            <!-- Research 管理卡片 -->
+            <div class="private blog_card research" onclick="location.href='{{ url_for('private.private_research_list') }}'">
+                <h3 style="margin:0; color: green;">Research 管理</h3>
+                <p style="color:#555; margin-top:0.5rem;">编辑科研相关内容</p>
+            </div>
+        </div>
     </div>
 
-    
-
-    {% else %}
-
-    <!-- 顶部刘海错误提示 -->
+    <!-- 顶部错误提示 -->
     <div id="topErrorBar"></div>
-    <!-- 密码弹窗-->
-    <div class="overlay" id="passwordModal">
+
+    <!-- 密码弹窗，初始隐藏 -->
+    <div class="overlay" id="passwordModal" style="display:none;">
         <div class="modal-box">
             <form id="pwdForm" autocomplete="off" style="width:100%;">
                 <input type="password" id="pwdInput" name="password" placeholder="请输入密码"/>
@@ -68,18 +60,19 @@
                     <button type="submit" class="button_submit">确认</button>
                 </div>
             </form>
-            
         </div>
     </div>
-    {% endif %}
 </div>
+
 <script>
     // 给外部 JS 提供 Flask 渲染的 URL
     const PRIVATE_PAGE_URL = "{{ url_for('private.private_page') }}";
     const UPLOAD_TOOL_URL = "{{ url_for('private.upload_tool') }}";
 </script>
-<script src="{{ url_for('static', filename='js/private_password.js') }}" defer></script>
-<script src="{{ url_for('static', filename='js/private_upload_tool.js') }}" defer></script>
+
+<!-- 加载你的 JS 文件 -->
+<script src="{{ url_for('static', filename='js/private_password.js') }}"></script>
+<script src="{{ url_for('static', filename='js/private_upload_tool.js') }}"></script>
 {% endblock %}
 
 
