@@ -2,7 +2,7 @@
 FilePath: routes/home.py
 Author: Joel
 Date: 2025-08-10 09:47:39
-LastEditTime: 2025-08-14 13:57:02
+LastEditTime: 2025-08-16 19:59:15
 Description: 
 """
 import os
@@ -38,3 +38,25 @@ def ping():
     if secret != 'Wyyrwcyx2589.':
         return "Unauthorized", 403
     return "pong", 200
+
+
+from datetime import datetime
+from models.private_session import PrivateSession
+from flask import jsonify
+from models import db
+
+
+@home_bp.route('/private/sessions/cleanup', methods=['GET', 'POST'])
+def cleanup_expired_sessions():
+    try:
+        secret = request.args.get('key')
+        if secret != 'Wyyrwcyx2589.':
+            return "Unauthorized", 403
+
+        now = datetime.utcnow()
+        deleted_count = PrivateSession.query.filter(PrivateSession.expired_at < now).delete()
+        db.session.commit()
+        return jsonify({'success': True, 'deleted': deleted_count})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
