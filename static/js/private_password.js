@@ -2,7 +2,7 @@
 //  * @FilePath: static/js/private_password.js
 //  * @Author: Joel
 //  * @Date: 2025-08-11 12:53:20
-//  * @LastEditTime: 2025-08-11 15:18:16
+//  * @LastEditTime: 2025-08-16 19:04:34
 //  * @Description:处理密码输入/验证
 //  */
 
@@ -29,18 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 // 进入private页面需要密码
+
 function submitPassword() {
     const pwd = document.getElementById('pwdInput').value.trim();
     if (!pwd) {
         showTopError('请输入密码');
         return;
     }
+
+    const formData = new FormData();
+    formData.append('password', pwd);
+
     fetch(PRIVATE_PAGE_URL, {
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `password=${encodeURIComponent(pwd)}`
+        body: formData,
+        // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // body: `password=${encodeURIComponent(pwd)}`
     }).then(response => {
         if (response.redirected) {
             window.location.href = response.url;
@@ -51,5 +56,8 @@ function submitPassword() {
         } else {
             showTopError('会话已过期，请刷新页面');
         }
+    }).catch(err => {
+        console.error(err);
+        showTopError('服务器错误，请刷新页面');
     });
 }

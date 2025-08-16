@@ -2,17 +2,17 @@
 FilePath: routes/private.py
 Author: Joel
 Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-14 15:58:59
+LastEditTime: 2025-08-16 19:00:54
 Description: 
 """
 """
 FilePath: routes/private.py
 Author: Joel
 Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-14 15:58:59
+LastEditTime: 2025-08-16 19:00:54
 Description: 
 """
-from flask import Blueprint, render_template, redirect, url_for, flash, session
+from flask import Blueprint, render_template, redirect, url_for, flash, session, request, current_app, jsonify
 from datetime import datetime, timedelta
 import os
 from werkzeug.utils import secure_filename
@@ -51,32 +51,83 @@ def allowed_file(filename, allowed_exts):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_exts
 
 
+# ==== 进入private的密码验证 ================================================================================
+# token验证，可以跨域
+import jwt
+import datetime
+
+# 生成 token 的密钥
+TOKEN_SECRET = os.getenv("PRIVATE_TOKEN_SECRET", "supersecretkey")
+ACCESS_DURATION_MINUTES = ACCESS_DURATION  # 120分钟有效期
+
+import jwt
+from datetime import datetime, timedelta
+
+
+def generate_token():
+    exp = datetime.utcnow() + ACCESS_DURATION
+    payload = {"exp": exp}
+    token = jwt.encode(payload, TOKEN_SECRET, algorithm="HS256")
+    # PyJWT >= 2.0 返回 str，不需要 decode
+    if isinstance(token, bytes):
+        token = token.decode('utf-8')
+    return token
+
+
+def verify_token(token):
+    try:
+        jwt.decode(token, TOKEN_SECRET, algorithms=["HS256"])
+        return True
+    except jwt.ExpiredSignatureError:
+        return False
+    except jwt.InvalidTokenError:
+        return False
+
+
 @private_bp.route('/', methods=['GET', 'POST'])
 def private_page():
+    token = request.args.get('token')
+    access = False
+
+    if token and verify_token(token):
+        access = True
+
     if request.method == 'POST':
         if request.form.get('password') == PASSWORD:
-            session['private_access'] = True
-            session['private_access_time'] = datetime.utcnow().isoformat()
-            return redirect(url_for('private.private_page'))
+            token = generate_token()
+            return redirect(url_for('private.private_page', token=token))
         else:
             return '', 401
 
-    access = False
-    access_time_str = session.get('private_access_time')
-    if session.get('private_access') and access_time_str:
-        access_time = datetime.fromisoformat(access_time_str)
-        if datetime.utcnow() - access_time < ACCESS_DURATION:
-            access = True
-        else:
-            session.pop('private_access', None)
-            session.pop('private_access_time', None)
+    return render_template('private.html', access=access, token=token)
 
-    return render_template('private.html', access=access)
+
+# session验证，无法跨域
+# @private_bp.route('/', methods=['GET', 'POST'])
+# def private_page():
+#     if request.method == 'POST':
+#         if request.form.get('password') == PASSWORD:
+#             session['private_access'] = True
+#             session['private_access_time'] = datetime.utcnow().isoformat()
+#             return redirect(url_for('private.private_page'))
+#         else:
+#             return '', 401
+# 
+#     access = False
+#     access_time_str = session.get('private_access_time')
+#     if session.get('private_access') and access_time_str:
+#         access_time = datetime.fromisoformat(access_time_str)
+#         if datetime.utcnow() - access_time < ACCESS_DURATION:
+#             access = True
+#         else:
+#             session.pop('private_access', None)
+#             session.pop('private_access_time', None)
+# 
+#     return render_template('private.html', access=access)
 
 
 # === 博客相关 ==========================================================================================
 
-from flask import request, jsonify
 from models.blog import Blog
 from models import db
 
@@ -130,7 +181,6 @@ def blog_delete():
 
 
 # === 工具相关 ==========================================================================================
-from flask import request, jsonify, current_app
 import glob
 
 
@@ -156,15 +206,19 @@ def private_tools_manage():
 
 @private_bp.route('/tools/upload_tool', methods=['POST'])
 def upload_tool():
-    # 会话过期拦截
-    access_time_str = session.get('private_access_time')
-    if not session.get('private_access') or not access_time_str:
-        return jsonify({'error': '会话已过期，请重新输入密码'}), 401
+    # # 会话过期拦截
+    # access_time_str = session.get('private_access_time')
+    # if not session.get('private_access') or not access_time_str:
+    #     return jsonify({'error': '会话已过期，请重新输入密码'}), 401
+    # access_time = datetime.fromisoformat(access_time_str)
+    # if datetime.utcnow() - access_time >= ACCESS_DURATION:
+    #     session.pop('private_access', None)
+    #     session.pop('private_access_time', None)
+    #     return jsonify({'error': '会话已过期，请重新输入密码'}), 401
 
-    access_time = datetime.fromisoformat(access_time_str)
-    if datetime.utcnow() - access_time >= ACCESS_DURATION:
-        session.pop('private_access', None)
-        session.pop('private_access_time', None)
+    # token过期拦截
+    token = request.form.get('token') or request.args.get('token')
+    if not token or not verify_token(token):
         return jsonify({'error': '会话已过期，请重新输入密码'}), 401
 
     if 'exeFile' not in request.files:
