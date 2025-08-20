@@ -2,7 +2,7 @@
 FilePath: routes/private.py
 Author: Joel
 Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-16 23:26:12
+LastEditTime: 2025-08-20 21:58:57
 Description: 
 """
 from flask import Blueprint, render_template, redirect, url_for, flash, session, request, current_app, jsonify
@@ -105,6 +105,7 @@ def blog_list():
 
 @private_bp.route('/blog/new', methods=['GET', 'POST'])
 def blog_new():
+    new_post = Blog(title='', content='')
     if request.method == 'POST':
         title = request.form.get('title', '').strip()
         content = request.form.get('content', '').strip()
@@ -115,7 +116,7 @@ def blog_new():
         db.session.add(new_post)
         db.session.commit()
         return redirect(url_for('private.blog_list'))
-    return render_template('private_blog_new.html')
+    return render_template('private_blog_new.html', post=new_post)
 
 
 @private_bp.route('/blog/<int:post_id>', methods=['GET', 'POST'])
@@ -285,6 +286,7 @@ def private_english_list():
 # new
 @private_bp.route('/english/new', methods=['GET', 'POST'])
 def private_english_new():
+    new_content = EnglishContent(title='', description='')
     if request.method == 'POST':
         title = request.form.get('title', '').strip()
         description = request.form.get('description', '').strip()
@@ -296,7 +298,7 @@ def private_english_new():
             db.session.commit()
             flash('内容已保存', 'success')
             return redirect(url_for('private.private_english_list'))
-    return render_template('private_english_new.html')
+    return render_template('private_english_new.html', post=new_content)
 
 
 # edit
@@ -347,6 +349,7 @@ def private_research_list():
 # new
 @private_bp.route('/research/new', methods=['GET', 'POST'])
 def private_research_new():
+    new_content = ResearchContent(title='', description='')
     if request.method == 'POST':
         title = request.form.get('title', '').strip()
         description = request.form.get('description', '').strip()
@@ -358,7 +361,7 @@ def private_research_new():
             db.session.commit()
             flash('内容已保存', 'success')
             return redirect(url_for('private.private_research_list'))
-    return render_template('private_research_new.html')
+    return render_template('private_research_new.html', post=new_content)
 
 
 # edit

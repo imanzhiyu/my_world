@@ -2,7 +2,7 @@
  * @FilePath: static/css/private_blog.css
  * @Author: Joel
  * @Date: 2025-08-11 15:36:47
- * @LastEditTime: 2025-08-13 13:34:12
+ * @LastEditTime: 2025-08-20 21:20:57
  * @Description: 
  */
 
@@ -17,8 +17,8 @@
 
 /* 发布新博客页 */
 .private-blog-new {
-    width: 70%; /* 占屏幕宽度的 70% */
-    max-width: 900px; /* 最大不超过 900px */
+    width: 75%; /* 占屏幕宽度的 70% */
+    max-width: 1000px; /* 最大不超过 900px */
     min-width: 600px; /* 最小不小于 600px，防止过窄 */
     margin: 2rem auto; /* 垂直 2rem，水平居中 */
     padding: 2rem;
@@ -96,11 +96,11 @@
 
 /* 详情页 */
 .blog-detail-container {
-    width: 70%;
-    max-width: 900px;
+    width: 75%;
+    max-width: 1000px;
     min-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: 1rem auto;
+    padding: 1rem;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -111,7 +111,7 @@
 }
 
 .blog-detail-container h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: #007bff;
     font-size: 1.8rem;
     text-align: left;
