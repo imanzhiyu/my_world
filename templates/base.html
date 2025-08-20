@@ -2,7 +2,7 @@
  * @FilePath: templates/base.html
  * @Author: Joel
  * @Date: 2025-08-10 09:48:38
- * @LastEditTime: 2025-08-14 19:23:22
+ * @LastEditTime: 2025-08-20 19:11:59
  * @Description: 
  -->
 <!DOCTYPE html>
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/personal.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/english.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/research.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/private_textarea_editor.css') }}">
 </head>
 <body class="{% if request.path == '/' or request.path == '/private/blog' or request.path == '/private/english' or request.path == '/private/research'%}home-page{% else %}other-page{% endif %}">
 <nav class="navbar navbar-expand-lg navbar-dark">

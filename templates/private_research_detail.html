@@ -2,7 +2,7 @@
  * @FilePath: templates/private_research_detail.html
  * @Author: Joel
  * @Date: 2025-08-13 18:42:02
- * @LastEditTime: 2025-08-13 18:42:25
+ * @LastEditTime: 2025-08-20 21:58:24
  * @Description: 
  -->
 {% extends 'base.html' %}
@@ -17,9 +17,13 @@
             <input type="text" id="title" name="title" required value="{{ post.title }}">
         </div>
 
-        <div>
-            <label for="description">内容 (支持富文本HTML):</label>
-            <textarea id="description" name="description" rows="10" required>{{ post.description }}</textarea>
+        <div class="form-group">
+            <label for="content">内容 (支持富文本HTML):</label>
+            <!-- 富文本编辑器容器 -->
+            <div id="editor">{{ post.description|safe }}</div>
+            <!-- 隐藏的 textarea，提交时写入 HTML -->
+            <textarea id="content" name="description" style="display:none"></textarea>
+            <div id="tooltip" class="ql-tooltip-custom"></div>
         </div>
 
         <div class="buttons">
@@ -28,6 +32,9 @@
         </div>
     </form>
 </div>
-
+<!-- Quill 样式 & 脚本 -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script src="{{ url_for('static', filename='js/private_textarea_editor.js') }}"></script>
 <script src="{{ url_for('static', filename='js/private_research_detail.js') }}"></script>
 {% endblock %}

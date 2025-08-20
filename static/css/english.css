@@ -2,7 +2,7 @@
  * @FilePath: static/css/english.css
  * @Author: Joel
  * @Date: 2025-08-11 22:46:46
- * @LastEditTime: 2025-08-13 18:22:34
+ * @LastEditTime: 2025-08-20 21:12:45
  * @Description: 
  */
 
@@ -172,11 +172,11 @@
 /* 新增页面 */
 .private-english-edit,
 .private-english-new {
-    width: 70%;
-    max-width: 900px;
+    width: 75%;
+    max-width: 1000px;
     min-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: 1rem auto;
+    padding: 1rem;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -189,7 +189,7 @@
 .private-english-edit h1,
 .private-english-new h1 {
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
 }
 

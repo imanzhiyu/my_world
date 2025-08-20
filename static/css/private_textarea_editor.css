@@ -1,0 +1,155 @@
+/**
+ * @FilePath: static/css/private_textarea_editor.css
+ * @Author: Joel
+ * @Date: 2025-08-20 19:04:55
+ * @LastEditTime: 2025-08-20 21:39:16
+ * @Description: 
+ */
+#editor {
+    height: calc(100vh - 470px);
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    position: relative; /* 用于全屏按钮定位 */
+}
+
+/* 自定义下拉菜单显示文字 */
+.ql-toolbar .ql-header .ql-picker-label::before,
+.ql-toolbar .ql-header .ql-picker-item::before,
+.ql-toolbar .ql-size .ql-picker-label::before,
+.ql-toolbar .ql-size .ql-picker-item::before,
+.ql-toolbar .ql-font .ql-picker-label::before,
+.ql-toolbar .ql-font .ql-picker-item::before {
+    content: attr(data-label);
+}
+
+/* tooltip 效果 */
+.ql-tooltip-custom {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: none;
+    z-index: 1000;
+}
+
+/* 字体 CSS 显示生效 */
+.ql-font-arial {
+    font-family: Arial, sans-serif;
+}
+
+.ql-font-times-new-roman {
+    font-family: "Times New Roman", serif;
+}
+
+.ql-font-courier-new {
+    font-family: "Courier New", monospace;
+}
+
+.ql-font-georgia {
+    font-family: Georgia, serif;
+}
+
+.ql-font-verdana {
+    font-family: Verdana, sans-serif;
+}
+
+.ql-font-tahoma {
+    font-family: Tahoma, sans-serif;
+}
+
+.ql-font-comic-sans-ms {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.ql-font-serif {
+    font-family: serif;
+}
+
+.ql-font-monospace {
+    font-family: monospace;
+}
+
+.ql-font- {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+
+.ql-font-simsun {
+    font-family: "SimSun", "宋体", serif;
+}
+
+.ql-font-fangsong {
+    font-family: "FangSong", "伪宋", serif;
+}
+
+.ql-font-simhei {
+    font-family: "SimHei", "黑体", sans-serif;
+}
+
+.ql-font-youyuan {
+    font-family: "YouYuan", "幼圆", sans-serif;
+}
+
+/* 下拉菜单固定高度，超出可滚动 */
+.ql-picker-options {
+    max-height: 200px;
+    overflow-y: auto;
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.ql-picker-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.ql-picker-options::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.ql-picker-options::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* 全屏样式 */
+.ql-fullscreen {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 工具栏固定在顶部 */
+.ql-fullscreen .ql-toolbar.ql-snow {
+    flex-shrink: 0;
+}
+
+/* 编辑区占满剩余高度 */
+.ql-fullscreen .ql-container.ql-snow {
+    flex-grow: 1;
+    height: auto !important;
+}
+
+/* 全屏按钮样式 */
+#fullscreen-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1001;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+}
+
+
+
+
+
