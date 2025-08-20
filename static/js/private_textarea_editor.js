@@ -2,14 +2,14 @@
 //  * @FilePath: static/js/private_textarea_editor.js
 //  * @Author: Joel
 //  * @Date: 2025-08-20 19:05:56
-//  * @LastEditTime: 2025-08-20 21:37:05
+//  * @LastEditTime: 2025-08-20 22:29:54
 //  * @Description:
 //  */
 // /**
 //  * @FilePath: static/js/private_textarea_editor.js
 //  * @Author: Joel
 //  * @Date: 2025-08-20 19:05:56
-//  * @LastEditTime: 2025-08-20 21:37:05
+//  * @LastEditTime: 2025-08-20 22:29:54
 //  * @Description:
 //  */
 
@@ -101,7 +101,7 @@ document.querySelectorAll('.ql-size .ql-picker-item').forEach(item => {
         if (!isNaN(num)) item.setAttribute('data-label', num);
     }
 });
-document.querySelector('.ql-size .ql-picker-label').setAttribute('data-label', '14');
+document.querySelector('.ql-size .ql-picker-label').setAttribute('data-label', '18');
 
 document.querySelectorAll('.ql-font .ql-picker-item').forEach(item => {
     const val = item.getAttribute('data-value');
