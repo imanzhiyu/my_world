@@ -2,14 +2,7 @@
 //  * @FilePath: static/js/private_textarea_editor.js
 //  * @Author: Joel
 //  * @Date: 2025-08-20 19:05:56
-//  * @LastEditTime: 2025-08-20 22:29:54
-//  * @Description:
-//  */
-// /**
-//  * @FilePath: static/js/private_textarea_editor.js
-//  * @Author: Joel
-//  * @Date: 2025-08-20 19:05:56
-//  * @LastEditTime: 2025-08-20 22:29:54
+//  * @LastEditTime: 2025-08-21 15:54:10
 //  * @Description:
 //  */
 
@@ -82,9 +75,26 @@ var quill = new Quill('#editor', {
 });
 
 // ======== 提交保存 HTML 内容到 textarea ========
-document.querySelector('form').onsubmit = function () {
-    document.querySelector('#content').value = quill.root.innerHTML;
-};
+// 公共表单提交逻辑
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    if (!form) return;
+
+    form.onsubmit = function () {
+        // 如果页面有 #content，就写入 #content
+        const contentField = document.querySelector("#content");
+        if (contentField) {
+            contentField.value = quill.root.innerHTML;
+        }
+
+        // 如果页面有 #bio，就写入 #bio
+        const bioField = document.querySelector("#bio");
+        if (bioField) {
+            bioField.value = quill.root.innerHTML;
+        }
+    };
+});
+
 
 // ======== 自定义下拉显示文字 ========
 const headerLabels = {'1': '标题1', '2': '标题2', '3': '标题3', 'false': '正文'};
@@ -137,6 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
         editorContainer.classList.toggle('ql-fullscreen');
         fullscreenBtn.innerText = editorContainer.classList.contains('ql-fullscreen') ? '🗗' : '⛶';
     });
+});
+
+// 单独处理人员编辑页面
+document.addEventListener("DOMContentLoaded", function () {
+    const bioField = document.getElementById("bio");
+    if (bioField && bioField.value) {
+        // 用 Quill API 插入 HTML，而不是当纯文本
+        quill.clipboard.dangerouslyPasteHTML(bioField.value);
+    }
 });
 
 
