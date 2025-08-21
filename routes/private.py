@@ -2,7 +2,7 @@
 FilePath: routes/private.py
 Author: Joel
 Date: 2025-08-10 09:48:08
-LastEditTime: 2025-08-20 21:58:57
+LastEditTime: 2025-08-21 18:58:34
 Description: 
 """
 from flask import Blueprint, render_template, redirect, url_for, flash, session, request, current_app, jsonify
@@ -58,7 +58,7 @@ def private_page():
 
     if request.method == 'POST':
         if request.form.get('password') == PASSWORD:
-            # 生成 session_id 并保存到 session cookie
+            # 生成 session_id 
             session_id = str(uuid.uuid4())
             # 写入数据库
             expired_at = datetime.utcnow() + ACCESS_DURATION
@@ -66,6 +66,7 @@ def private_page():
             db.session.add(new_sess)
             db.session.commit()
 
+            # 返回 JSON 包含 session_id 和 next_url
             return jsonify({"session_id": session_id})
         else:
             return '', 401

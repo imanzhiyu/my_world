@@ -1,0 +1,42 @@
+<!--
+ * @FilePath: templates/private_base.html
+ * @Author: Joel
+ * @Date: 2025-08-21 18:49:09
+ * @LastEditTime: 2025-08-21 18:49:14
+ * @Description: 
+ -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <!-- 私人内容区，初始隐藏 -->
+    <div id="privateContent" style="display:none;">
+        {% block private_content %}
+        <!-- 子页面内容放这里 -->
+        {% endblock %}
+    </div>
+
+    <!-- 顶部错误提示 -->
+    <div id="topErrorBar"></div>
+
+    <!-- 密码弹窗，初始隐藏 -->
+    <div class="overlay" id="passwordModal" style="display:none;">
+        <div class="modal-box">
+            <form id="pwdForm" autocomplete="off" style="width:100%;">
+                <input type="password" id="pwdInput" name="password" placeholder="请输入密码"/>
+                <div class="password_button">
+                    <button type="button" class="button_cancel">取消</button>
+                    <button type="submit" class="button_submit">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const PRIVATE_PAGE_URL = "{{ url_for('private.private_page') }}";
+</script>
+
+<!-- 引入统一 JS -->
+<script src="{{ url_for('static', filename='js/private_check.js') }}"></script>
+{% endblock %}
