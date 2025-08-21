@@ -2,7 +2,7 @@
 //  * @FilePath: static/js/private_password.js
 //  * @Author: Joel
 //  * @Date: 2025-08-11 12:53:20
-//  * @LastEditTime: 2025-08-16 23:43:23
+//  * @LastEditTime: 2025-08-21 19:05:28
 //  * @Description:处理密码输入/验证
 //  */
 const privateContent = document.getElementById("privateContent");
@@ -78,7 +78,7 @@ if (privateContent && passwordModal) {
         e.preventDefault();
         submitPassword();
     });
-    document.querySelector(".button_cancel")?.addEventListener('click', cancelPassword);
+    document.querySelector("#passwordModal .button_cancel")?.addEventListener('click', cancelPassword);
 }
 
 
